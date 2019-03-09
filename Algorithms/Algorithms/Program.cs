@@ -15,16 +15,20 @@ namespace Algorithms
 
         static void Work()
         {
-            var countOfArrays = 10;
-            var countOfElements = 10000;
+            var countOfArrays = 1000;
+            var countOfElements = 1000;
             List<int[]> list = new List<int[]>();
             for (var iteration = 0; iteration < countOfArrays; iteration++)
             {
                 list.Add(CreateArray(countOfElements));
             }
-            MeasureActionTime(list, (a) =>
+            MeasureActionTime(list, "Bubble sort", (a) =>
             {
                 a.BubbleSort();
+            });
+            MeasureActionTime(list, "Shaker sort", (a) =>
+            {
+                a.ShakerSort();
             });
         }
 
@@ -39,10 +43,10 @@ namespace Algorithms
             return array;
         }
 
-        static void MeasureActionTime(List<int[]> arrays, Action<int[]> action)
+        static void MeasureActionTime(List<int[]> arrays, string description, Action<int[]> action)
         {
             var sw = new Stopwatch();
-            Console.WriteLine("Begin measure..");
+            Console.WriteLine($"Begin action. {description}");
             sw.Start();
 
             arrays.ForEach(action);
