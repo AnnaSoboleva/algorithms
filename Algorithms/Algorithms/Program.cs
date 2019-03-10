@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace Algorithms
 {
@@ -15,20 +16,25 @@ namespace Algorithms
 
         static void Work()
         {
-            var countOfArrays = 1000;
+            var countOfArrays = 1;
             var countOfElements = 1000;
             List<int[]> list = new List<int[]>();
             for (var iteration = 0; iteration < countOfArrays; iteration++)
             {
                 list.Add(CreateArray(countOfElements));
             }
-            MeasureActionTime(list, "Bubble sort", (a) =>
+            MeasureActionTime(list.Clone(), "Bubble sort", (a) =>
             {
                 a.BubbleSort();
             });
-            MeasureActionTime(list, "Shaker sort", (a) =>
+            MeasureActionTime(list.Clone(), "Shaker sort", (a) =>
             {
                 a.ShakerSort();
+            });
+
+            MeasureActionTime(list.Clone(), "Gnome sort", (a) =>
+            {
+                a.GnomeSort();
             });
         }
 
@@ -54,5 +60,7 @@ namespace Algorithms
             sw.Stop();
             Console.WriteLine($"The end of action. Time of execution: {sw.ElapsedMilliseconds / 1000.0} sec.");
         }
+
+
     }
 }

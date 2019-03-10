@@ -42,6 +42,23 @@
             }
         }
 
+        public static void GnomeSort(this int[] array)
+        {
+            for (var position = 1; position < array.Length;)
+            {
+                if (array[position] < array[position - 1])
+                {
+                    ExchangeNeighborElements(array, position - 1);
+                    if (position > 1)
+                    {
+                        position--;
+                        continue;
+                    }
+                }
+                position++;
+            }
+        }
+
         private static void ExchangeNeighborElements(int[] array, int startPosition)
         {
             var temp = array[startPosition];
